@@ -42,7 +42,7 @@ def index(request):
     roomId = format(webhook['data']['roomId'])
     message = api.messages.get(messageId)
     hook_text = message.text
-    api.messages.create(roomId, hook_text)
+    api.messages.create(roomId, text=hook_text)
     print("Message text: " + hook_text)
     return "true"
 
