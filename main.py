@@ -41,9 +41,10 @@ def index(request):
     messageId = format(webhook['data']['id'])
     roomId = format(webhook['data']['roomId'])
     message = api.messages.get(messageId)
-    hook_text = message.text
-    api.messages.create(roomId, text=hook_text)
-    print("Message text: " + hook_text)
+    if (message.personId != botId): #message from other person
+        hook_text = message.text
+        api.messages.create(roomId, text=hook_text)
+        print("Message text: " + hook_text)
     return "true"
 
 
