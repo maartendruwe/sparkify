@@ -35,14 +35,15 @@ def index(request):
     /batcave   - echoes the incoming text to the room
     /batsignal - replies to the room with an image
     """
-    print("Webhook received")
+    print("Webhook message received")
     webhook = json.loads(request.body)
     print(webhook)
     messageId = format(webhook['data']['id'])
     roomId = format(webhook['data']['roomId'])
     message = api.messages.get(messageId)
-    text = message.text
-    print("Message text: " + text)
+    hook_text = message.text
+    api.messages.create(roomId, hook_text)
+    print("Message text: " + hook_text)
     return "true"
 
 
@@ -57,7 +58,7 @@ def index(request):
 # bat_signal  = "https://upload.wikimedia.org/wikipedia/en/c/c6/Bat-signal_1989_film.jpg"
 botId = getBotId()
 run_itty(server='wsgiref', host='0.0.0.0', port=3010)
-print("Run itty started")
+
 
 # if __name__ == '__main__':
 
