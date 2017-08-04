@@ -57,7 +57,7 @@ def index(request):
 # bat_signal  = "https://upload.wikimedia.org/wikipedia/en/c/c6/Bat-signal_1989_film.jpg"
 botId = getBotId()
 run_itty(server='wsgiref', host='0.0.0.0', port=3010)
-
+print("Run itty started")
 
 # if __name__ == '__main__':
 
