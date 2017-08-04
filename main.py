@@ -35,20 +35,17 @@ def index(request):
     /batcave   - echoes the incoming text to the room
     /batsignal - replies to the room with an image
     """
-    print("Webhook message received")
     webhook = json.loads(request.body)
-    print(webhook)
     messageId = format(webhook['data']['id'])
-    roomId = format(webhook['data']['roomId'])
     message = api.messages.get(messageId)
     if (message.personId != botId): #message from other person
+        roomId = format(webhook['data']['roomId'])
+        print("Webhook message received")
+        print(webhook)
         hook_text = message.text
         api.messages.create(roomId, text=hook_text)
         print("Message text: " + hook_text)
     return "true"
-
-
-
 
 
 
